@@ -17,7 +17,7 @@ class CreateBanksCurrenciesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('bank_id');
             $table->unsignedBigInteger('currency_id');
-            $table->integer('price');
+            $table->float('price');
             $table->foreign('bank_id')->references('id')->on('banks')->onDelete('cascade');
             $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('cascade');
             $table->timestamps();
