@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Currency extends Model
 {
     protected $fillable = [
-        'name',
-        'slug',
-        'short_name',
+        'name_currency',
+        'slug_currency',
+        'short_name_currency',
         'background'
     ];
 

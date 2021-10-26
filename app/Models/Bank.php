@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Bank extends Model
 {
     protected $fillable = [
-        'title',
-        'description',
-        'slug',
+        'name_bank',
+        'description_bank',
+        'slug_bank',
     ];
 
     public function currencies(): BelongsToMany
