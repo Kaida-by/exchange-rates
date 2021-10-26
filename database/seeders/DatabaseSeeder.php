@@ -14,93 +14,101 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $name = 'name_bank';
+        $description = 'description_bank';
+        $slug = 'slug_bank';
+
         $banks = [
             [
-                'name' => 'Приорбанк',
-                'description' => 'Приорбанк описание',
-                'slug' => 'priorbank',
+                $name => 'Приорбанк',
+                $description => 'Приорбанк описание',
+                $slug => 'priorbank',
             ],
             [
-                'name' => 'Альфа-банк',
-                'description' => 'Альфа-банк описание',
-                'slug' => 'alfa-bank',
+                $name => 'Альфа-банк',
+                $description => 'Альфа-банк описание',
+                $slug => 'alfa-bank',
             ],
             [
-                'name' => 'Белгазпромбанк',
-                'description' => 'Белгазпромбанк описание',
-                'slug' => 'belgazprombank',
+                $name => 'Белгазпромбанк',
+                $description => 'Белгазпромбанк описание',
+                $slug => 'belgazprombank',
             ],
             [
-                'name' => 'БСБ банк',
-                'description' => 'БСБ банк описание',
-                'slug' => 'bsb',
+                $name => 'БСБ банк',
+                $description => 'БСБ банк описание',
+                $slug => 'bsb',
             ],
             [
-                'name' => 'Беларусбанк',
-                'description' => 'Беларусбанк описание',
-                'slug' => 'belarusbank',
+                $name => 'Беларусбанк',
+                $description => 'Беларусбанк описание',
+                $slug => 'belarusbank',
             ],
         ];
 
+        $name = 'name_currency';
+        $short_name = 'short_name_currency';
+        $slug = 'slug_currency';
+
         $currencies = [
             [
-                'name' => 'Доллар',
-                'slug' => 'dollar',
-                'short_name' => '$',
+                $name => 'Доллар',
+                $slug => 'dollar',
+                $short_name => '$',
                 'background' => '#FF0000',
             ],
             [
-                'name' => 'Евро',
-                'slug' => 'euro',
-                'short_name' => '€',
+                $name => 'Евро',
+                $slug => 'euro',
+                $short_name => '€',
                 'background' => '#0000FF',
             ],
             [
-                'name' => 'Российский рубль',
-                'slug' => 'rub',
-                'short_name' => '₽',
+                $name => 'Российский рубль',
+                $slug => 'rub',
+                $short_name => '₽',
                 'background' => '#008000',
             ],
             [
-                'name' => 'Злотый',
-                'slug' => 'zloty',
-                'short_name' => 'zł',
+                $name => 'Злотый',
+                $slug => 'zloty',
+                $short_name => 'zł',
                 'background' => '#FFD700',
             ],
             [
-                'name' => 'Юань',
-                'slug' => 'yan',
-                'short_name' => '¥',
+                $name => 'Юань',
+                $slug => 'yan',
+                $short_name => '¥',
                 'background' => '#FFC0CB',
             ],
             [
-                'name' => 'Гривна',
-                'slug' => 'grivna',
-                'short_name' => '₴',
+                $name => 'Гривна',
+                $slug => 'grivna',
+                $short_name => '₴',
                 'background' => '#20B2AA',
             ],
             [
-                'name' => 'Фунт',
-                'slug' => 'funt',
-                'short_name' => '£',
+                $name => 'Фунт',
+                $slug => 'funt',
+                $short_name => '£',
                 'background' => '#808000',
             ],
             [
-                'name' => 'Франк',
-                'slug' => 'frank',
-                'short_name' => '₣',
+                $name => 'Франк',
+                $slug => 'frank',
+                $short_name => '₣',
                 'background' => '#800000',
             ],
             [
-                'name' => 'Иен',
-                'slug' => 'yen',
-                'short_name' => '¥',
+                $name => 'Иен',
+                $slug => 'yen',
+                $short_name => '¥',
                 'background' => '#FFFF00',
             ],
             [
-                'name' => 'Тугрик',
-                'slug' => 'tugrick',
-                'short_name' => '₮',
+                $name => 'Тугрик',
+                $slug => 'tugrick',
+                $short_name => '₮',
                 'background' => '#808080',
             ],
         ];
@@ -119,7 +127,7 @@ class DatabaseSeeder extends Seeder
         for ($i = 0; $i <= $row; $i++) {
             foreach ($banks as $keyBank => $bank) {
                 foreach ($currencies as $keyCurrency => $currency) {
-                    switch ($currency['slug']) {
+                    switch ($currency['slug_currency']) {
                         case 'dollar':
                             $tmp['bank_id'] = $keyBank + 1;
                             $tmp['currency_id'] = $keyCurrency + 1;
