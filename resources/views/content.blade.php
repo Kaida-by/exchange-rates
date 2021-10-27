@@ -14,8 +14,12 @@
         @foreach($currencies_banks as $currency)
             <tr>
                 <th scope="row">{{ $currency['name_currency'] }} ({{ $currency['short_name_currency'] }})</th>
-                @foreach($currency['price'] as $price)
-                    <th scope="row">{{ $price }}</th>
+                @foreach($currency['prises'] as $price)
+                    @if($price['min'])
+                        <th scope="row" class="text-danger" style="color: red">{{ $price['value'] }}</th>
+                    @else
+                        <th scope="row">{{ $price['value'] }}</th>
+                    @endif
                 @endforeach
             </tr>
         @endforeach
