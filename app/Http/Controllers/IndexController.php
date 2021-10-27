@@ -33,6 +33,6 @@ class IndexController extends Controller
             ->where('bc.created_at', 'like', '%' . $date . '%')
             ->get();
 
-        return view('welcome', compact('currencies_banks', 'banks', 'currencies'));
+        return view('content', compact('currencies_banks', 'banks', 'currencies'));
     }
 }
