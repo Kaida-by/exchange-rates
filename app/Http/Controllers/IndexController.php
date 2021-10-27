@@ -12,9 +12,12 @@ class IndexController extends Controller
 {
     public function index(Request $request)
     {
+        $banks = Bank::all();
+        $currencies = Currency::all();
+
         $date = today()->subDays(1)->format('Y-m-d');
 
-        $currencies = DB::table('banks_currencies', 'bc')
+        $currencies_banks = DB::table('banks_currencies', 'bc')
             ->select(
                 'currencies.name_currency',
                 'currencies.slug_currency',
@@ -30,6 +33,6 @@ class IndexController extends Controller
             ->where('bc.created_at', 'like', '%' . $date . '%')
             ->get();
 
-        return view('content', compact('currencies'));
+        return view('content', compact('currencies_banks', 'banks', 'currencies'));
     }
 }
