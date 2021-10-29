@@ -7,10 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Currencies</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script defer src="{{ asset('js/app.js') }}"></script>
 </head>
 <body>
-<div class="container">
-    @yield('content')
-</div>
+    <div id="app">
+        <div class="container">
+            @yield('content')
+        </div>
+    </div>
 </body>
 </html>
