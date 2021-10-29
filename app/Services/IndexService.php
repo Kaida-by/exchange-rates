@@ -4,6 +4,7 @@ namespace App\Services;
 
 use \Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
 
 class IndexService
 {
@@ -43,12 +44,26 @@ class IndexService
 
     public static function getPrises(): Collection
     {
-        $date = today()->subDays(1)->format('Y-m-d');
+        $date = today()->subDays(3)->format('Y-m-d');
 
         return DB::table('currencies', 'c')
             ->select('*')
             ->leftJoin('banks_currencies', 'c.id', '=', 'banks_currencies.currency_id')
             ->where('banks_currencies.created_at', 'like', '%' . $date . '%')
             ->get();
+    }
+
+    public function getCharts(): array
+    {
+        return $charts = [
+            [
+                'title' => 'testtitle',
+                'url' => 'testurl'
+            ],
+            [
+                'title' => 'qeqweqwe',
+                'url' => 'asdxzcxzc'
+            ]
+        ];
     }
 }

@@ -25,4 +25,6 @@
         @endforeach
         </tbody>
     </table>
+
+    <charts-component :charts="{{json_encode($charts ?? '')}}"></charts-component>
 @endsection
