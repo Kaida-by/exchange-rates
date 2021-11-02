@@ -5,29 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Bank;
 use App\Models\Currency;
 use App\Services\IndexService;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class IndexController extends Controller
 {
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $banks = Bank::all();
         $currencies = Currency::all();
-        $prices = IndexService::getPrises();
+        $prices = IndexService::getPrises($request);
 
         $currencies_banks = IndexService::getCurrenciesBanks($prices);
-        $dataT = [
-            [
-                'title' => 'testtitle',
-                'url' => 'testurl'
-            ],
-            [
-                'title' => 'qeqweqwe',
-                'url' => 'asdxzcxzc'
-            ]
-        ];
+
         return new Response(view('content', compact(
-            'currencies_banks', 'banks', 'currencies', 'dataT'
+            'currencies_banks', 'banks', 'currencies'
         )));
     }
 }
