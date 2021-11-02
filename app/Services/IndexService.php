@@ -2,10 +2,9 @@
 
 namespace App\Services;
 
-use App\Models\Currency;
+use Illuminate\Http\Request;
 use \Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Response;
 
 class IndexService
 {
@@ -43,14 +42,15 @@ class IndexService
         return $currencies_banks;
     }
 
-    public static function getPrises(): Collection
+    public static function getPrises(Request $request): Collection
     {
-        $date = today()->subDays(10)->format('Y-m-d');
+        $date = $request->get('date') ?? today()->format('Y-m-d');
 
         return DB::table('currencies', 'c')
             ->select('*')
             ->leftJoin('banks_currencies', 'c.id', '=', 'banks_currencies.currency_id')
             ->where('banks_currencies.created_at', 'like', '%' . $date . '%')
+            ->where('c.name_currency', 'like', '%' . $request->get('search') . '%')
             ->get();
     }
 
