@@ -30,18 +30,4 @@ class IndexController extends Controller
             'currencies_banks', 'banks', 'currencies', 'dataT'
         )));
     }
-
-    public function getCharts(): array
-    {
-        return [
-            [
-                'title' => 'testtitle',
-                'url' => 'testurl'
-            ],
-            [
-                'title' => 'qeqweqwe',
-                'url' => 'asdxzcxzc'
-            ]
-        ];
-    }
 }

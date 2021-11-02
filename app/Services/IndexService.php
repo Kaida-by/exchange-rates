@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Currency;
 use \Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
@@ -44,7 +45,7 @@ class IndexService
 
     public static function getPrises(): Collection
     {
-        $date = today()->subDays(3)->format('Y-m-d');
+        $date = today()->subDays(10)->format('Y-m-d');
 
         return DB::table('currencies', 'c')
             ->select('*')
@@ -55,15 +56,54 @@ class IndexService
 
     public function getCharts(): array
     {
-        return $charts = [
-            [
-                'title' => 'testtitle',
-                'url' => 'testurl'
-            ],
-            [
-                'title' => 'qeqweqwe',
-                'url' => 'asdxzcxzc'
-            ]
+        return [
+            'labels' => static::getDate(),
+            'datasets' => static::getCurrencies()
         ];
+    }
+
+    public static function getDate(): array
+    {
+        $date = DB::table('banks_currencies')
+            ->select('updated_at')
+            ->groupBy('updated_at')
+            ->get();
+        $result = [];
+
+        foreach ($date as $value) {
+            $result[] = date('Y-m-d', strtotime($value->updated_at));
+        }
+
+        return array_reverse($result);
+    }
+
+    public static function getCurrencies($bank_id = 1): array
+    {
+        $currencies = DB::table('currencies', 'c')
+            ->select('c.id', 'c.name_currency', 'c.background')
+            ->get();
+
+        $result = [];
+
+        foreach ($currencies as $key => $currency) {
+            $result[$key]['label'] = $currency->name_currency;
+            $result[$key]['backgroundColor'] = $currency->background;
+            $result[$key]['borderColor'] = $currency->background;
+
+            $data = DB::table('banks_currencies', 'bc')
+                ->select('bc.price')
+                ->leftJoin('banks', 'bc.bank_id', '=', 'banks.id')
+                ->where('bc.bank_id', '=', $bank_id)
+                ->where('bc.currency_id', '=', $currency->id)
+                ->get();
+
+            $tmp = [];
+            foreach ($data as $value) {
+                $tmp[] = $value->price;
+            }
+            $result[$key]['data'] = array_reverse($tmp);
+        }
+
+        return $result;
     }
 }

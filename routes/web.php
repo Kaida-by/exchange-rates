@@ -16,4 +16,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [IndexController::class, 'index']);
-Route::get('/get-charts', [IndexController::class, 'getCharts']);
+Route::get('/get-charts', [IndexService::class, 'getCharts']);
