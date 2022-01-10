@@ -45,8 +45,7 @@ class IndexService
 
     public static function getPrises(Request $request): Collection
     {
-        $date = $request->get('date') ?? today()->format('Y-m-d');
-        //$date = today()->subDays(10)->format('Y-m-d');
+        $date = $request->get('date') ?? today()->subDays(100)->format('Y-m-d');
 
         return DB::table('currencies', 'c')
             ->select('*')
