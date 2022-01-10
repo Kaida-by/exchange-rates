@@ -2075,6 +2075,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -2089,11 +2095,14 @@ __webpack_require__.r(__webpack_exports__);
             fill: false
           }
         }
-      }
+      },
+      selected: 'A',
+      options: []
     };
   },
   mounted: function mounted() {
     this.update();
+    this.getDates();
   },
   methods: {
     update: function update() {
@@ -2101,6 +2110,14 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/get-charts').then(function (response) {
         _this.data = response.data;
+      });
+    },
+    getDates: function getDates() {
+      var _this2 = this;
+
+      axios.get('/get-dates').then(function (response) {
+        console.log(options);
+        _this2.options = response.data;
       });
     }
   }
@@ -68798,6 +68815,47 @@ var render = function () {
         }),
       ],
       1
+    ),
+    _vm._v(" "),
+    _c(
+      "select",
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.selected,
+            expression: "selected",
+          },
+        ],
+        on: {
+          change: function ($event) {
+            var $$selectedVal = Array.prototype.filter
+              .call($event.target.options, function (o) {
+                return o.selected
+              })
+              .map(function (o) {
+                var val = "_value" in o ? o._value : o.value
+                return val
+              })
+            _vm.selected = $event.target.multiple
+              ? $$selectedVal
+              : $$selectedVal[0]
+          },
+        },
+      },
+      _vm._l(_vm.options, function (option) {
+        return _c("option", { domProps: { value: option.slug } }, [
+          _vm._v("\n            " + _vm._s(option.label) + "\n        "),
+        ])
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _c(
+      "button",
+      { staticClass: "btn btn-outline-success", attrs: { type: "submit" } },
+      [_vm._v("Search")]
     ),
   ])
 }

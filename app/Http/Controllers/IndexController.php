@@ -17,9 +17,10 @@ class IndexController extends Controller
         $prices = IndexService::getPrises($request);
 
         $currencies_banks = IndexService::getCurrenciesBanks($prices);
+        $dates = IndexService::getDatesForCharts();
 
         return new Response(view('content', compact(
-            'currencies_banks', 'banks', 'currencies'
+            'currencies_banks', 'banks', 'currencies', 'dates'
         )));
     }
 }
