@@ -27,4 +27,17 @@
     </table>
 
     <charts-component></charts-component>
+
+{{--    <form class="form-inline" action="/">--}}
+{{--        <select class="custom-select mr-sm-2" name="switchDate">--}}
+{{--            @foreach($dates as $date)--}}
+{{--                @if(request('switchDate') === $date['slug'])--}}
+{{--                    <option value="{{ $date['slug'] }}" selected>{{ $date['label'] }}</option>--}}
+{{--                @else--}}
+{{--                    <option value="{{ $date['slug'] }}">{{ $date['label'] }}</option>--}}
+{{--                @endif--}}
+{{--            @endforeach--}}
+{{--        </select>--}}
+{{--        <button class="btn btn-outline-success" type="submit">Search</button>--}}
+{{--    </form>--}}
 @endsection

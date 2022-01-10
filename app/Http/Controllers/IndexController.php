@@ -16,18 +16,10 @@ class IndexController extends Controller
         $prices = IndexService::getPrises();
 
         $currencies_banks = IndexService::getCurrenciesBanks($prices);
-        $dataT = [
-            [
-                'title' => 'testtitle',
-                'url' => 'testurl'
-            ],
-            [
-                'title' => 'qeqweqwe',
-                'url' => 'asdxzcxzc'
-            ]
-        ];
+        $dates = IndexService::getDatesForCharts();
+
         return new Response(view('content', compact(
-            'currencies_banks', 'banks', 'currencies', 'dataT'
+            'currencies_banks', 'banks', 'currencies', 'dates'
         )));
     }
 }

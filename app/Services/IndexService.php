@@ -2,10 +2,8 @@
 
 namespace App\Services;
 
-use App\Models\Currency;
 use \Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Response;
 
 class IndexService
 {
@@ -45,7 +43,7 @@ class IndexService
 
     public static function getPrises(): Collection
     {
-        $date = today()->subDays(10)->format('Y-m-d');
+        $date = today()->subDays(100)->format('Y-m-d');
 
         return DB::table('currencies', 'c')
             ->select('*')
@@ -79,6 +77,12 @@ class IndexService
 
     public static function getCurrencies($bank_id = 1): array
     {
+        $current = today()->format('Y-m');
+
+        if (request()->get('switchDate')) {
+            $month = explode('-', request()->get('switchDate'))[1];
+        }
+
         $currencies = DB::table('currencies', 'c')
             ->select('c.id', 'c.name_currency', 'c.background')
             ->get();
@@ -102,6 +106,26 @@ class IndexService
                 $tmp[] = $value->price;
             }
             $result[$key]['data'] = array_reverse($tmp);
+        }
+
+        return $result;
+    }
+
+    public static function getDatesForCharts(): array
+    {
+        $dates = static::getDate();
+        $tmp = [];
+
+        foreach ($dates as $date) {
+            $tmp[] = date('Y-m', strtotime($date));
+        }
+
+        $tmp = array_reverse(array_unique($tmp));
+        $result = [];
+
+        foreach ($tmp as $key => $value) {
+            $result[$key]['slug'] = $value;
+            $result[$key]['label'] = date('Y-F', strtotime($value));
         }
 
         return $result;
